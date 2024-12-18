@@ -9,7 +9,9 @@
     <LangVersion>latest</LangVersion>
     <RootNamespace>CrimsonDice</RootNamespace>
   </PropertyGroup>
-
+  <Target Name="Thunderstore Copy to Dist" AfterTargets="AfterBuild" Condition=" '$(Configuration' == 'Release'">
+		<Copy SourceFiles="$(OutDir)\CrimsonDice.dll" DestinationFolder="$(SolutionDir)/dist" />
+	</Target>
   <ItemGroup>
     <PackageReference Include="BepInEx.Unity.IL2CPP" Version="6.0.0-be.691" IncludeAssets="compile" />
     <PackageReference Include="BepInEx.Core" Version="6.0.0-be.691" IncludeAssets="compile" />
