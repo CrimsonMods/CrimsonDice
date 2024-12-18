@@ -300,28 +300,5 @@ public static class Extensions
     {
         return entity.Has<Disabled>();
     }
-
-    public static void LocalSystem(User user, float3 translation, string message)
-    {
-        
-        float maxDistance = 40f;
-        float2 currentPoint = new float2(translation.x, translation.z);
-
-        var onlinePlayers = PlayerService.GetUsers(false);
-        foreach (var player in onlinePlayers)
-        {
-            if(player.Read<User>().Equals(user)) continue;
-
-            if(player.TryGetComponent(out LocalToWorld localToWorld))
-            {
-                var playerPos = new float2(localToWorld.Position.x, localToWorld.Position.z);
-                var distance = math.distance(playerPos, currentPoint);
-                if (distance <= maxDistance)
-                {
-                    ServerChatUtils.SendSystemMessageToClient(Core.EntityManager, player.Read<User>(), message);
-                }
-            }
-        }
-    }
 }
 //#pragma warning restore CS8500
